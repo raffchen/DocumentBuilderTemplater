@@ -1,0 +1,781 @@
+[{
+	"sectionTitle": "Tutorial",
+	"sectionText": "This is a dummy section that will show you how to use this program.",
+	"sectionInputs": [
+		{
+			"inputType": "yesNoQuestion",
+			"questionID": "tutorial_yesNo",
+			"inputLabel": "Do you want to learn how to use this program? :"
+		},
+		{
+			"inputType": "singleLineText",
+			"questionID": "tutorial_single_line",
+			"inputLabel": "Single Line Input :"
+		},
+		{
+			"inputType": "textBoxInput",
+			"questionID": "tutorial_text_box",
+			"inputLabel": "Text Box Input :",
+			"defaultText": "Some text boxes will have default values in them already, like this message.\n\nIn addition, sometimes under the help section for a text box there will be buttons you can press there that will insert snippets of text."
+		},
+		{
+			"inputType": "singleChoiceOption",
+			"questionID": "tutorial_single_choice",
+			"inputLabel": "Did you look at the info text for all these questions? :",
+			"radioOptions" : ["Yes", "No"]
+		}
+	],
+	"sectionConditions": [],
+	"sectionHelp": [
+		{
+			"helpType": "helpText",
+			"helpTitle": "Yes/No Questions",
+			"helpContent": "The first question of this section is a 'Yes/No' question type. If you answer 'no', then the section will be hidden and ignored when making the document."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Single Line Input Questions",
+			"helpContent": "This is just a single line for things like names and numbers."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Text Box Input Questions",
+			"helpContent": "This is a text area for paragraphs. Interaction with the window while filling a text box out will be a little different."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "",
+			"helpContent": "Text boxes are for paragraphs, so formatting is kept when you make the document. This means that any tab indents or newlines will be kept and used when the document is made. The text as you see it in the text box is how it will look in the document."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "",
+			"helpContent": "In addition, text boxes can have inserts over here in the help pane. You can click on one of the buttons below to insert the text next to it."
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "tutorial_text_box",
+			"helpContent": "This is an example insert. Inserts will always be put in with a newline before them."
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "tutorial_text_box",
+			"helpContent": "You can have multiple inserts for one question."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Single Choice Question",
+			"helpContent": "This is a single choice question. Out of the options, you select one and your choice is taken into account later."
+		}
+	]
+},
+{
+	"sectionTitle": "Initial Information",
+	"sectionText": "Please fill out the information below:",
+	"sectionInputs": [
+		{
+			"inputType": "singleLineText",
+			"questionID": "drNumber",
+			"inputLabel": "CAPD_DR/INC# :"
+		},
+		{
+			"inputType": "singleLineText",
+			"questionID": "peaceOfficerName",
+			"inputLabel": "Peace Officer Name :"
+		},
+		{
+			"inputType": "singleLineText",
+			"questionID": "agencyName",
+			"inputLabel": "Agency Name :"
+		},
+		{
+			"inputType": "singleLineText",
+			"questionID": "providerName",
+			"inputLabel": "Target Provider Name :"
+		}
+	],
+	"sectionConditions": [],
+	"sectionHelp": [
+		{
+			"helpType": "helpText",
+			"helpTitle": "CAPD_DR/INC Number",
+			"helpContent": "This is the CAPD_DR/INC Number."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Peace Officer Name",
+			"helpContent": "This is the name of the peace officer who is assembling this search warrant."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Agency Name",
+			"helpContent": "This is the name of the agency to whom the peace officer belongs."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Provider Name",
+			"helpContent": "This is the name of the provider for who the search warrant is for."
+		}
+	]
+},
+{
+	"sectionTitle": "Delivery Information",
+	"sectionText": "Please fill out the information about where the results of this warrant should be delivered:",
+	"sectionInputs": [
+		{
+			"inputType": "singleLineText",
+			"questionID": "delivery_phone_number",
+			"inputLabel": "Delivery Phone Number :"
+		},
+		{
+			"inputType": "singleLineText",
+			"questionID": "delivery_fax_number",
+			"inputLabel": "Delivery Fax Number :"
+		},
+		{
+			"inputType": "singleLineText",
+			"questionID": "delivery_email",
+			"inputLabel": "Delivery Email Address :"
+		},
+		{
+			"inputType": "singleLineText",
+			"questionID": "delivery_detective_name",
+			"inputLabel": "Detective's Name :"
+		},
+		{
+			"inputType": "singleLineText",
+			"questionID": "delivery_detective_serial_number",
+			"inputLabel": "Detective's Serial Number :"
+		}
+	],
+	"sectionConditions": [],
+	"sectionHelp": [
+		{
+			"helpType": "helpText",
+			"helpTitle": "Delivery Phone Number",
+			"helpContent": "This is the phone number of the delivery location."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Delivery Fax Number",
+			"helpContent": "This is the fax number of the delivery location."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Delivery Email Address",
+			"helpContent": "This is the email address of the delivery location."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Detective's Name",
+			"helpContent": "This is the name of the detective who should receive the delivery. Normally this is the same as the peace officer who is assembling this warrant."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Detective's Serial Number",
+			"helpContent": "This is the serial number of the detective who should receive the delivery."
+		}
+	]
+},
+{
+	"sectionTitle": "Affiant Qualifications",
+	"sectionText": "Please enter the affiant's qualifications:",
+	"sectionInputs": [
+		{
+			"inputType": "textBoxInput",
+			"questionID": "affiant_qualifications",
+			"inputLabel": "Affiant Qualifications :",
+			"defaultText": "I, your affiant, Detective ..."
+		}
+	],
+	"sectionConditions": [],
+	"sectionHelp": [
+		{
+			"helpType": "helpText",
+			"helpTitle": "Affiant Qualifications",
+			"helpContent": "In addition to your background, training and experience related to the crime(s) under investigation, list your background, training and experience related to communications and social media evidence and how criminals use electronic communications and social media."
+		}
+	]
+},
+{
+	"sectionTitle": "Warrant Objective",
+	"sectionText": "Please enter the objective of the warrant:",
+	"sectionInputs": [
+		{
+			"inputType": "textBoxInput",
+			"questionID": "warrant_objective",
+			"inputLabel": "Warrant Objective :",
+			"defaultText": "The objective of this warrant is to..."
+		}
+	],
+	"sectionConditions": [],
+	"sectionHelp": [
+		{
+			"helpType": "helpText",
+			"helpTitle": "Warrant Objective",
+			"helpContent": "The following inserts are examples of what you can include in this section."
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "warrant_objective",
+			"helpContent": "…identify the suspect(s) who committed the crimes described herein and to obtain evidence useful in proving the suspect committed the crimes described herein;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "warrant_objective",
+			"helpContent": "…identify potentially unknown suspects who are participating in the crimes described herein as co-conspirators and/or aiders and abettors;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "warrant_objective",
+			"helpContent": "…preserve and uncover exculpatory evidence;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "warrant_objective",
+			"helpContent": "…establish levels of culpability of any suspects/co-conspirators (known or not known at this time);"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "warrant_objective",
+			"helpContent": "…obtain evidence of dominion and control over any accounts/devices used as instrumentalities of the criminal conduct and dates, times, and locations of the felony violations described herein.  The volume of the amount and quantity of use of those accounts, the locations during the use(s) of those accounts, and the communications and information stored therein, in total (during the specific time frame detailed in the attached and incorporated description pages), will establish dominion and control of those accounts; whether fixed (at some time or times within the time frame specified) or continuous and on-going (throughout the time frame specified), will establish whether the accounts were created specifically as instrumentalities of criminal conduct or whether the accounts serve more than one purpose;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "warrant_objective",
+			"helpContent": "…establish patterns, time frames (including those currently or not currently known), and/or locations for the criminal(s)/criminal activity;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "warrant_objective",
+			"helpContent": "…reveal correspondence to known and unknown co-conspirators;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "warrant_objective",
+			"helpContent": "…discover the fruits of the crime."
+		}
+	]
+},
+{
+	"sectionTitle": "Probable Cause",
+	"sectionText": "Please enter the statement of probable cause:",
+	"sectionInputs": [
+		{
+			"inputType": "textBoxInput",
+			"questionID": "probable_cause",
+			"inputLabel": "Statement of Probable Cause :",
+			"defaultText": "On DATE, your affiant responded to a TYPE OF CRIME investigation at ADDRESS, City of Angels, Angels County, incident #########.  Also investigating were..."
+		}
+	],
+	"sectionConditions": [],
+	"sectionHelp": [
+		{
+			"helpType": "helpText",
+			"helpTitle": "Probable Cause",
+			"helpContent": "This is where you fill out the probable cause for this warrant. In addition to establishing probable cause for the crimes you are investigating,"
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "",
+			"helpContent": "- Explain how you know that Facebook has the kind of records you are requesting."
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "probable_cause",
+			"helpContent": "Based upon my experience/knowledge/speaking with other officers/past search warrants, I know that Facebook maintains information about their customers including the records requested in this search warrant. I have read Facebook.com’s Terms of Service, Privacy Policy, and Law Enforcement Manual…"
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "",
+			"helpContent": "- Explain how you identified the target account and why you believe that the target account is relevant to your investigation. If you believe that you know who the target account belongs to, state why you believe that."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "",
+			"helpContent": "- Explain why you chose the time period for which you are requesting records."
+		}
+	]
+},
+{
+	"sectionTitle": "Request for Sealed Warrant",
+	"sectionText": "Please answer the question below and fill out the required information if needed:",
+	"sectionInputs": [
+		{
+			"inputType": "yesNoQuestion",
+			"questionID": "sealed_warrant_yesNo",
+			"inputLabel": "Do you want to seal this warrant? :"
+		},
+		{
+			"inputType": "textBoxInput",
+			"questionID": "sealed_warrant_reasons",
+			"inputLabel": "Reasons for Sealed Warrant :",
+			"defaultText": "Public disclosure of this case could cause irreparable harm to the investigation and hinder identifying other involved parties as well as cause undue public alarm because [FILL IN SPECIFIC FACTS]. Therefore, your affiant is requesting the entire warrant and affidavit be sealed from public disclosure."
+		}
+	],
+	"sectionConditions": [],
+	"sectionHelp": [
+		{
+			"helpType": "helpText",
+			"helpTitle": "Request for Sealed Warrant",
+			"helpContent": "First, you must decide if you want to seal the warrant or not. Be aware that the next section, 'Request to Delay Notice', requires you to answer YES here."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Reasons for Sealed Warrant",
+			"helpContent": "I DON'T KNOW WHAT TO PUT HERE."
+		}
+	]
+},
+{
+	"sectionTitle": "Request to Delay Notice",
+	"sectionText": "Please answer the question below and fill out the required information if needed:",
+	"sectionInputs": [
+		{
+			"inputType": "yesNoQuestion",
+			"questionID": "delay_notice_yesNo",
+			"inputLabel": "Do you want to include a delay notice? :"
+		},
+		{
+			"inputType": "textBoxInput",
+			"questionID": "request_to_delay_situation",
+			"inputLabel": "Request to Delay Situtation :"
+		},
+		{
+			"inputType": "singleLineText",
+			"questionID": "request_to_delay_days",
+			"inputLabel": "Request to Delay Number of Days :"
+		},
+		{
+			"inputType": "textBoxInput",
+			"questionID": "request_to_delay_reasons",
+			"inputLabel": "Request to Delay Reasons :",
+			"defaultText": "I request an order to delay notification to the target account holder for ___ days.  I believe that there is good cause to believe that notification to the target of the search would create an adverse result for the following reasons:\n"
+		}
+	],
+	"sectionConditions": ["sealed_warrant_yesNo"],
+	"sectionConditionsFalse": "You cannot complete this section because you said NO in the Sealed Warrant section. A Delay Notice requires a Sealed Warrant.",
+	"sectionHelp": [
+		{
+			"helpType": "helpText",
+			"helpTitle": "Request to Delay Notice",
+			"helpContent": "First, you must decide if you want to request that notice be delayed. Be aware that this section requires you to answer YES in the previous section."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Request to Delay Situtation",
+			"helpContent": "I DON'T KNOW WHAT TO PUT HERE."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Request to Delay Number of Days",
+			"helpContent": "This is the number of days you wish for notification to be delayed."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Request to Delay Reasons",
+			"helpContent": "These are the reasons for why you want notification to be delayed. Be aware, you must SELECT what reasons you want and then fill them out. Use the inserts below to add reasons."
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "request_to_delay_reasons",
+			"helpContent": "• danger to the life or physical safety of an individual because [FILL IN SPECIFIC FACTS];"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "request_to_delay_reasons",
+			"helpContent": "• flight from prosecution because [FILL IN SPECIFIC FACTS];"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "request_to_delay_reasons",
+			"helpContent": "• destruction of or tampering with evidence because [FILL IN SPECIFIC FACTS];"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "request_to_delay_reasons",
+			"helpContent": "• intimidation of potential witnesses because [FILL IN SPECIFIC FACTS];"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "request_to_delay_reasons",
+			"helpContent": "• serious jeopardy to an investigation because [FILL IN SPECIFIC FACTS];"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "request_to_delay_reasons",
+			"helpContent": "• undue delay of a trial because [FILL IN SPECIFIC FACTS]."
+		}
+	]
+},
+{
+	"sectionTitle": "Request For Extension",
+	"sectionText": "Please select the correct options for the following questions:",
+	"sectionInputs": [
+		{
+			"inputType": "singleChoiceOption",
+			"questionID": "foreign_or_local_corporation",
+			"inputLabel": "Foreign or California Corporation :",
+			"radioOptions" : ["Foreign Corporation", "California Corporation"]
+		},
+		{
+			"inputType": "singleChoiceOption",
+			"questionID": "multiple_or_single_location",
+			"inputLabel": "Multiple or Single Location :",
+			"radioOptions" : ["Multiple Locations", "Single Location"]
+		}
+	],
+	"sectionConditions": [],
+	"sectionHelp": [
+		{
+			"helpType": "helpText",
+			"helpTitle": "Foreign or California Corporation",
+			"helpContent": "This is whether or not the target corporation/provider is in California or not."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Multiple or Single Location",
+			"helpContent": "This is whether the warrant is considering multiple locations or a single location."
+		}
+	]
+},
+{
+	"sectionTitle": "Facebook Location Description",
+	"sectionText": "Please fill out the following information:",
+	"sectionInputs": [
+		{
+			"inputType": "singleLineText",
+			"questionID": "location_number",
+			"inputLabel": "Location # :"
+		},
+		{
+			"inputType": "textBoxInput",
+			"questionID": "target_facebook_accounts",
+			"inputLabel": "Target Accounts :",
+			"defaultText": "    1. https://www.facebook.com/USERNAME (viewed on DATE/TIME UTC)\n\nNOTE THAT IF YOU DESCRIBE THE TARGET ACCOUNT BY USER NAME YOU MUST SPECIFY THE OPERATIVE DATE FOR THE USER NAME\n-OR-\n    1. https://www.facebook.com/profile.php?id=100006596116008"
+		},
+		{
+			"inputType": "singleLineText",
+			"questionID": "facebook_time_period_start",
+			"inputLabel": "Time Period Beginning :"
+		},
+		{
+			"inputType": "singleLineText",
+			"questionID": "facebook_time_period_end",
+			"inputLabel": "Time Period End :"
+		},
+		{
+			"inputType": "textBoxInput",
+			"questionID": "facebook_data_types",
+			"inputLabel": "For the following types of data :",
+			"defaultText": "Check the info panel on the right to see the list of data types you can place here."
+		},
+		{
+			"inputType": "textBoxInput",
+			"questionID": "facebook_additional_data_types",
+			"inputLabel": "For the following types of data :",
+			"defaultText": "Check the info panel on the right to see the list of data types you can place here."
+		}
+	],
+	"sectionConditions": [],
+	"sectionHelp": [
+		{
+			"helpType": "helpText",
+			"helpTitle": "Location Number",
+			"helpContent": "This is the location number of this location. Be aware, previous location numbers carry over regardless of separate warrants."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Target Accounts",
+			"helpContent": "These are the accounts you need information about. See the default text for examples."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Time Period Beginning/End",
+			"helpContent": "These are the constraints for the time period you need information for."
+		},
+		{
+			"helpType": "helpText",
+			"helpTitle": "Data Types",
+			"helpContent": "There are many specific kinds of data types you can request. Requesting for all data types is not reccommended. Look through the following list of inserts and pick the ones you need."
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“About Me”: information the user added to the About section of the user’s timeline such as relationships, work, “education”, “current city”, date of birth where you live, “favorite quotes”, “gender”, “hometown”, “religious views”, “political views”, “spoken languages”,  including any updates or changes the user made in the past and what is currently in the About section of their timeline;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Account Status History”: the dates when the user’s account was reactivated, deactivated, disabled or deleted;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Active Sessions”: All stored active sessions, including date, time, device, IP address, machine cookie and browser information;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Address”: the user’s current address and any past addresses the user had on the user’s account;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Ads Clicked”: dates, times and titles of ads clicked;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Ads Topics”: a list of topics that the user may be targeted against based on the user’s stated likes, interests and other data the user put in the user’s timeline;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Alternate Name”: any alternate names the user has on the user’s account;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Apps”: all of the apps the user has added;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Check-ins”: the places the user has checked into;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Connections”: The people who have liked the user’s Page or Place, RSVPed to the user’s event, installed the user’s app or checked in to the user’s advertised place within 24 hours of viewing or clicking on an ad or Sponsored Story;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Credit Cards”: Credit card numbers given to Facebook to make purchases on Facebook (for example in apps);"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Currency”: the user’s preferred currency on Facebook which may be used to display prices and charge credit cards if the user uses Facebook Payments;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Emails”: email addresses the user added to the user’s account including those that the user may have removed;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Events”: Events the user has joined or been invited to;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Facial Recognition Data”: the unique number based on a comparison of the photos the user is tagged in. This data is used by Facebook to help other users’s tag the user in photos."},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Family”: friends you’re indicated are family members;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Followers”: a list of people who follow the user;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Following”: a list of people the user follows;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Friend Requests”: pending sent and received friend requests;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Friends”: a list of the user’s friends;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Groups”: a list of groups the user belongs to on Facebook;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Hidden from News Feed”: any friends, apps or pages the user has hidden from the user’s News Feed;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“IP Addresses”: all historically retained IP addresses where the user logged into the user’s Facebook account;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Last Location”: The last location associated with an update;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Linked Accounts”: a list of the accounts the user linked to the user’s Facebook account;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Likes on Other Sites”: likes the user made on sites off of Facebook;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Likes on Others’ Posts”: Posts, photos or other content the user has liked;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Likes on Your Posts from others”: likes on the user’s own posts, phoots or other content;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Locale”: the language the user selected to use Facebook in;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Logins”: all historically retained IP addresses, dates and times associated with logins to the user’s Facebook account;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Logouts”: all historically retained IP addresses, dates and times associated with logouts from the user’s Facebook account;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Messages”: messages the user sent and received on Facebook, including (if retained) any deleted messages;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Name”: the name on the user’s Facebook account;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Name Changes”: any changes the user made to the original name the user used when the user signed up for Facebook;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Networks”: Networks (such as affiliations with schools or workplaces) that the user belongs to on Facebook;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Notes”: any notes the user has written and published to the user’s account;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Pages You Admin”: a list of pages the user administrates;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Phone Numbers”: mobile phone numbers the user added to the user’s account, including verified mobile numbers the user added for security purposes;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Photos”: photos the user uploaded to the user’s account;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Photos Metadata”: any metadata that is transmitted with the user’s uploaded photos;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Physical Tokens”: badges the user has added to the user’s account;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Pokes”: to the extent that it is retained, a list of who’s poked the user and who the user has poked;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Posts by Others”: anything posted to the user’s timeline by someone else, such as wall posts or links shared on the user’s timeline by friends;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Posts by You”: anything the user posted to the user’s own timeline, such as photos, vides and status updates;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Privacy Settings”: the user’s privacy settings;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Recent Activities”: actions the user has taken and interactions the user"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Registration Date”: the date the user joined Facebook;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Removed Friends”: people the user has removed as friends;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Screen Names”: the screen names the user has added to the user’s account, and the service they’re associated with including whether the the screen names are hidden or visible on the user’s account;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Searches”: searches the user made on Facebook;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Shares”: content (for example news articles) the user has shared with others on Facebook using the Share button or link;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Status Updates”: any status updates the user has posted;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Vanity URL”: your Facebook URL (for example the username or vanity for the user’s account);"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Videos”: videos the user uploaded to the user’s account or posted on the user’s timeline;"
+		},
+		{
+			"helpType": "helpInsert",
+			"targetQuestionID": "facebook_data_types",
+			"helpContent": "“Videos’ Metadata”: any metadata that is transmitted with the user’s uploaded videos;"
+		}
+	]
+}]
+
+
+
+
