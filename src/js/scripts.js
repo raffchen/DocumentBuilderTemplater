@@ -160,14 +160,14 @@ function addyesNoQuestion(questionID, questionLabel) {
 	var yesButton = document.createElement("button");
 	yesButton.id = questionID + "_YesButton";
 	yesButton.name = questionID;
-	yesButton.className = "questionYesButton";
+	yesButton.className = "questionButton btn";
 	yesButton.innerHTML = "Yes";
 	yesButton.onclick = yesNoButtonHandler;
 
 	var noButton = document.createElement("button");
 	noButton.id = questionID + "_NoButton";
 	noButton.name = questionID;
-	noButton.className = "questionNoButton";
+	noButton.className = "questionButton btn";
 	noButton.innerHTML = "No";
 	noButton.onclick = yesNoButtonHandler;
 
@@ -282,7 +282,7 @@ function progressButtonHandler() {
 function addSubmitButton() {
 	var button = document.createElement("button");
 	button.id = "submitButton";
-	button.className = "submitButton";
+	button.className = "submitButton btn";
 	button.innerHTML = "Save and Continue";
 	button.addEventListener("click", submitButtonHandler);
 	answerDiv.appendChild(button);
@@ -316,7 +316,7 @@ function loadSection(sectionIndex) {
 	// clear the screen
 	$('#questionText').empty();
 	$('#questionAnswer').empty();
-	$('#helpPane').empty();
+	$('#help').empty();
 
 	var goodToGo = true;
 	if(targetSection.sectionConditions.length > 0) {
@@ -372,16 +372,16 @@ function loadHelpPane() {
 			if(sectionHelp[i].helpTitle != "") {
 				// Create and append a title section
 				var title = document.createElement('div');
-				title.className = "helpTitle h4";
+				title.className = "helpTitle";
 				title.innerHTML = sectionHelp[i].helpTitle;
-				$('#helpPane').append(title);
+				$('#help').append(title);
 			}
 
 			// Create and append a text section
 			var text = document.createElement('div');
 			text.className = "helpText";
 			text.innerHTML = sectionHelp[i].helpContent;
-			$('#helpPane').append(text);
+			$('#help').append(text);
 
 		} else if(sectionHelp[i].helpType == "helpInsert") {
 			// Create and append a button along with the text it inserts
@@ -402,7 +402,7 @@ function loadHelpPane() {
 			insertText.innerHTML = sectionHelp[i].helpContent;
 			insertWrapper.appendChild(insertText);
 
-			$('#helpPane').append(insertWrapper);
+			$('#help').append(insertWrapper);
 		}
 	}
 }
@@ -437,7 +437,7 @@ $(document).delegate('.textBoxFieldInput', 'keydown', function(e) {
 });
 
 var $body = $('body'); //Cache this for performance
-var $zoomElements = $('#helpPane, #questionText, #questionAnswer, #progressContent')
+var $zoomElements = $('#help, #questionText, #questionAnswer, #progressContent')
 
 var setBodyScale = function() {
     var scaleSource = $body.width(),

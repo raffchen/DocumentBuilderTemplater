@@ -1,29 +1,105 @@
 html, body {
     height: 100%;
     margin: 0;
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    overflow: hidden;
+    background-color: #fcfcfc;
 }
 
 .container {
     height: 100%;
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(15, 1fr);
 }
 
 #REPL {
-    grid-column: span 3;
+    background-color: black;
+    grid-column: span 5;
+}
+
+#navbar-wrapper {
+    grid-column: span 2;
+    padding-right: 2vh;
 }
 
 #navbar {
+    height: 100%;
+    box-shadow: 5px 0px 5px #f1f1f1;
     grid-column: span 2;
 }
 
 #main {
-    grid-column: span 4;
-    grid-template-rows: repeat(12, 1fr)
+    padding-right: 5vh;
+    padding-left: 2vh;
+    grid-column: span 5;
+    grid-template-rows: repeat(12, 1fr);
+    font-size: 0.75em;
+    padding-bottom: 1rem;
+    overflow-y: auto;
+}
+
+.questionButtonGroup {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.questionButton {
+    color: white;
+    background-color: #40c4ff;
+}
+
+.questionButton.active {
+    background-color: #00b0ff;
+}
+
+.singleLineInputField {
+    margin-bottom: 0.75rem;
+}
+
+.textBoxFieldInput {
+    margin-bottom: 0.75rem;
+}
+
+.radioInputField {
+    margin-bottom: 0.75rem;
+}
+
+.submitButton {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: #40c4ff;
+    color: white;
+    width: 100%;
 }
 
 #help {
     grid-column: span 3;
+    overflow-y: auto;
+    padding-left: 25px;
+}
+
+.helpTitle {
+    text-decoration: underline;
+    font-size: 0.85em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    padding-bottom: 0.2rem;
+}
+
+.helpText {
+    font-size: 0.75em;
+    padding-bottom: 1rem;
+}
+
+#insertButton {
+    background-color: white;
+    margin-bottom: 0.1rem;
+}
+
+.insertText {
+    font-size: 0.75em;
+    padding-bottom: 1rem;
 }
 
 #questionText {
@@ -38,12 +114,80 @@ html, body {
 }
 
 .progressButton {
+    text-overflow: ellipsis;
     border-radius: 2px;
     transition-duration: 0.3s;
     transition-property: background-color, color, opacity;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    color: #40c4ff;
-    opacity: 1;
     display: block;
     padding: 0.5rem 1rem;
+}
+
+.progressButton.active {
+    color: #40c4ff;
+    opacity: 1;
+}
+
+.progressButton:hover {
+    color: inherit;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+    width: 100%;
+    font: 400 13.3333px Arial;
+    resize: both;
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.btn {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 2px;
+    padding: 0 16px;
+    min-width: 64px;
+    height: 36px;
+    vertical-align: middle;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.14), 0 3px 4px 0 rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 36px;
+    overflow: hidden;
+    outline: none;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.btn::-moz-focus-inner {
+    border: none;
+}
+
+/* Turn on custom 8px wide scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: rgba(0,0,0,0);
+    -webkit-border-radius: 100px;
+}
+
+/* hover effect for both scrollbar area, and scrollbar 'thumb' */
+::-webkit-scrollbar:hover {
+background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* The scrollbar 'thumb' ...that marque oval shape in a scrollbar */
+::-webkit-scrollbar-thumb:vertical {
+background: rgba(0,0,0,0.3);
+-webkit-border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:vertical:active {
+background: rgba(0,0,0,0.5); 
+-webkit-border-radius: 100px;
 }
