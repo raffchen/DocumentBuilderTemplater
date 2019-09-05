@@ -10,10 +10,6 @@ var core = {
 
 var answerDiv = document.getElementById("questionAnswer");
 
-var fs = require('fs');
-var path = require('path');
-
-
 // on the landing panel, have a button where they can browse for a file
 function startProgramHandler() {
 	jQuery('#landingPanel').fadeOut();
@@ -28,7 +24,6 @@ function startProgramHandler() {
 }
 
 var configPath = "";
-var templatePath = "";
 function selectConfigHandler() {
 	var dialogPaths = dialog.showOpenDialogSync({
 		title: "Select Configuration File (sections.json)",
@@ -49,8 +44,6 @@ function selectConfigHandler() {
 
 	$('#landingSelectedConfigPath').html(configPath);
 }
-
-
 
 function handleConfigs(sections) {
 	if(sections != null) {
@@ -105,14 +98,6 @@ function searchWarrantScript() {
 // This function creates and appends a single input line with a label
 function addSingleLineInput(questionID, questionLabel) {
 	var label = document.createElement("div");
-	
-	/* var button = document.createElement("button");
-	button.id = questionID + "Button";
-	button.name = questionID;
-	button.className = "infoButton";
-	button.innerHTML = "<i class='step fi-info infoIcon' onclick='infoButtonHandler();'></i>";
-	button.onclick = infoButtonHandler;
-	label.appendChild(button); */
 
 	label.className = "singleLineInputFieldLabel w-100";
 	label.id = questionID + "_label";
@@ -134,14 +119,6 @@ function addSingleLineInput(questionID, questionLabel) {
 // This function creates and appends a text box input with default text if given
 function addTextBoxInput(questionID, questionLabel, defaultText) {
 	var label = document.createElement("div");
-	
-	/* var button = document.createElement("button");
-	button.id = questionID + "Button";
-	button.name = questionID;
-	button.className = "infoButton";
-	button.innerHTML = "<i class='step fi-info infoIcon' onclick='infoButtonHandler();'></i>";
-	button.onclick = infoButtonHandler;
-	label.appendChild(button); */
 
 	label.className = "textBoxFieldInputLabel w-100";
 	label.id = questionID + "_label";
@@ -210,14 +187,6 @@ function addyesNoQuestion(questionID, questionLabel) {
 // This function creates a multiple choice question that only allows for one selected answer
 function addSingleChoiceOption(questionID, questionLabel, options) {
 	var label = document.createElement("div");
-	
-	/* var button = document.createElement("button");
-	button.id = questionID + "Button";
-	button.name = questionID;
-	button.className = "infoButton";
-	button.innerHTML = "<i class='step fi-info infoIcon' onclick='infoButtonHandler();'></i>";
-	button.onclick = infoButtonHandler; 
-	label.appendChild(button); */
 
 	label.className = "singleLineInputFieldLabel w-100";
 	label.id = questionID + "_label";
@@ -297,45 +266,10 @@ function yesNoButtonHandler() {
 	}
 }
 
-function infoButtonHandler() {
-	/*
-	var questionID = $(window.event.target).parent()[0].name;
-
-	// send the infoBarText data to the main process for a new window
-
-	$('#helpPane').empty();
-	var infoPanel = document.getElementById("helpPane");
-
-	var infoText = "<p>" + core.infoBarText[questionID].infoText.replace(new RegExp("\n", 'g'), "<br>&emsp;&emsp;") + "</p>";
-	$('#helpPane').html(infoText);
-
-	if(core.infoBarText[questionID].buttons.length > 0) {
-		var buttons = core.infoBarText[questionID].buttons;
-		for(var i in buttons) {
-			// we need the button text and the button data
-			var button = document.createElement("button");
-			button.name = buttons[i].buttonData;
-			button.className = "moreInfoButton";
-			button.innerHTML = buttons[i].buttonText;
-			button.addEventListener("click", moreInfoButtonHandler);
-			infoPanel.appendChild(button);
-		}
-	}
-	*/
-}
-
-function moreInfoButtonHandler() {
-	/*
-	var data = $(window.event.target)[0].name;
-	ipcRenderer.send('infoWindow', data);
-	*/
-}
-
 function progressButtonHandler() {
 	var progressID = $(window.event.target)[0].id;
 	$('.active').toggleClass('active');
 	$(window.event.target).toggleClass('active');
-	saveInputs();
 
 	core.currentSectionIndex = progressID;
 	loadSection(progressID);
@@ -355,21 +289,12 @@ function addSubmitButton() {
 }
 
 function submitButtonHandler() {
-	// we need to get the supplied answers for all input fields and save them with their question ID in core.answers
-	saveInputs();
-
 	// we need to keep track of the current section and then advance to the next one when the submit button is pressed
 	core.currentSectionIndex++;
 	if(core.currentSectionIndex >= core.sections.length) {
 		// here we should display a confirmation dialog and if they confirm, write the data to the sheet and end the program
 		$('#submitButton').html("Submit and Make Document");
 		$('#submitButton').width("200px");
-
-		var makeDocumentBoolean = confirm("Are you sure you want to make the document?");
-		if(makeDocumentBoolean) {
-			makeDocument();
-		}
-
 	} else if(core.currentSectionIndex == core.sections.length-1) {
 		// We are on the LAST section
 		loadSection(core.currentSectionIndex, answerDiv);
@@ -383,31 +308,6 @@ function submitButtonHandler() {
 		loadSection(core.currentSectionIndex, answerDiv);
 		$('.active').toggleClass('active');
 		$('#'+core.currentSectionIndex).toggleClass('active');
-	}
-}
-
-function saveInputs() {
-	if(core.currentSectionIndex < core.sections.length) {
-		for(i in core.sections[core.currentSectionIndex].sectionInputs) {
-			var section = core.sections[core.currentSectionIndex].sectionInputs[i];
-			if(section.inputType == "singleLineText") {
-				var inputText = $('#' + section.questionID).val();
-				core.answers[section.questionID] = inputText;
-
-			} else if(section.inputType == "textBoxInput") {
-				var inputText = $('#' + section.questionID).val();
-				core.answers[section.questionID] = inputText;
-
-			} else if(section.inputType == "singleChoiceOption") {
-				var radioOptions = document.getElementsByName(section.questionID);
-
-				for(i in radioOptions) {
-					if(radioOptions[i].checked) {
-						core.answers[section.questionID] = radioOptions[i].value;
-					}
-				}
-			}
-		}
 	}
 }
 
@@ -458,104 +358,6 @@ function loadSection(sectionIndex) {
 		var reason = targetSection.sectionConditionsFalse;
 		$('#questionText').html(reason);
 		addSubmitButton();
-	}
-}
-
-function makeDocument() {
-	for(var key in core.answers) {
-		switch(key) {
-			case 'delay_notice_yesNo':
-				if(core.answers.sealed_warrant_yesNo && core.answers.delay_notice_yesNo) {
-					core.finalInserts['request_to_delay_insert'] = "Pursuant to Penal Code section 1546.2(b)(1), this court has the authority to delay notification to the target of this investigation for up to ninety (90) days upon a showing that contemporaneous notice will have an adverse result. Penal Code section 1546 (a) defines adverse result as: danger to the life or physical safety of an individual; flight from prosecution; destruction of or tampering with evidence; intimidation of potential witnesses; and serious jeopardy to an investigation or undue delay of a trial.\n\nAdditionally, your affiant is aware that service providers, including Facebook, will customarily notify the account holder of a government request for account information, absent a court order prohibiting such notification.  Your affiant hereby requests an order requiring the service provider(s) to make all attempts to preserve all information related to the above account(s) (18 USC 2703(f)), and delay notification to subscriber(s) or any party providing information from notifying any other party, with the exception of other verified law enforcement agencies, that this information has been sought.\n\n";
-					core.finalInserts["delay_notice_yesNo"] = true;
-
-				} else {
-					core.finalInserts["delay_notice_yesNo"] = false;
-				}
-				break;
-
-			case 'foreign_or_local_corporation':
-				if(core.answers[key] == "Foreign Corporation") {
-					core.finalInserts[key] = "BLAH";
-
-				} else if(core.answers[key] == "California Corporation") {
-					core.finalInserts[key] = "BLAH";
-
-				}
-				break;
-
-			case 'multiple_or_single_location':
-				if(core.answers[key] == "Single Location") {
-					core.finalInserts[key] = "I also know that the time period to obtain these records from most electronic and Internet based service providers, as well as the computer forensics, takes longer than the allotted ten-day warrant return period as required by statute [and department policy].  Therefore, I request that the warrant return date be adjusted to be due within 10 days of receipt of the information from a service provider or computer forensics laboratory.";
-
-				} else if(core.answers[key] == "Multiple Locations") {
-					core.finalInserts[key] = "I also know that the time period to obtain these records from most electronic and Internet based service providers, as well as the computer forensics, takes longer than the allotted ten-day warrant return period as required by statute [and department policy].  Furthermore, producing returns for each of the multiple locations as they are received would be burdensome to both the investigators as well as the courts.  Therefore, I request that the warrant return date be adjusted to be due within 10 days of receipt of the final information received from a service provider or computer forensics laboratory.";
-
-				}
-				break;
-
-			case 'delivery_phone_number':
-				core.finalInserts[key] = "Phone " + core.answers[key];
-				break;
-
-			case 'delivery_fax_number':
-				core.finalInserts[key] = "/ FAX " + core.answers[key];
-				break;
-
-			default:
-				core.finalInserts[key] = core.answers[key];
-		}
-	}
-
-	if(templatePath == undefined || templatePath == "") {
-		templatePath = path.resolve(__dirname, '../search_warrant_template.docx');
-	}
-	
-	var content = fs.readFileSync(templatePath, 'binary');
-	var zip = new JSZip(content);
-	var doc = new Docxtemplater();
-	doc.setOptions({
-		linebreaks: true,
-		nullGetter: function(part, scopeManager) {
-		    if (!part.module) {
-		        return "PLEASE_COMPLETE";
-		    }
-		    if (part.module === "rawxml") {
-		        return "";
-		    }
-		    return "";
-		}
-	})
-
-	doc.loadZip(zip);
-	doc.setData(
-	    core.finalInserts
-	);
-
-	try {
-	    doc.render()
-	}
-	catch (error) {
-	    var e = {
-	        message: error.message,
-	        name: error.name,
-	        stack: error.stack,
-	        properties: error.properties,
-	    }
-	    console.log(JSON.stringify({error: e}));
-	    // The error thrown here contains additional information when logged with JSON.stringify (it contains a property object).
-	    throw error;
-	}
-
-	var savePath = dialog.showSaveDialog({
-		title: "Save Document",
-		defaultPath: path.join(require('os').homedir(), 'Desktop/output.docx'),
-		buttonLabel: "Save Document"
-	});
-
-	if(savePath.filePath != undefined) {
-		var buf = doc.getZip().generate({type: 'nodebuffer'});
-		fs.writeFileSync(savePath.filePath, buf);
 	}
 }
 
