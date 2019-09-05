@@ -13,7 +13,7 @@
 
 <body>
     <div class="container">
-        <div id="REPL"></div>
+        <div id="REPL"><textarea id="REPL-textarea"></textarea></div>
 
         <div id="navbar-wrapper">
             <div id="navbar"></div>
@@ -34,11 +34,21 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous">
     </script>
-    <script type="text/javascript" src="./lib/Material/js/material.min.js"></script>
     <script type="text/javascript" src="./js/scripts.js"></script>
+    <script type="text/javascript" src="./lib/ace/src/ace.js"></script>
 
     <script>if (window.module) module = window.module;</script>
     <script>startProgramHandler()</script>
+
+    <script src="./lib/ace/src/theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./lib/ace/src/mode-json.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("REPL");
+        editor.setTheme("ace/theme/tomorrow_night");
+        editor.setFontSize(14);
+        var JSONMode = ace.require("ace/mode/json").Mode;
+        editor.session.setMode(new JSONMode());
+    </script>
 </body>
 
 </html>

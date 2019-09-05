@@ -20,7 +20,7 @@ function startProgramHandler() {
 
 	$.getJSON(configPath, function(data) {
 		handleConfigs(data);
-	})
+    })
 }
 
 var configPath = "";
