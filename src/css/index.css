@@ -1,3 +1,49 @@
 html, body {
     height: 100%;
+    margin: 0;
+}
+
+.container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+#REPL {
+    grid-column: span 3;
+}
+
+#navbar {
+    grid-column: span 2;
+}
+
+#main {
+    grid-column: span 4;
+    grid-template-rows: repeat(12, 1fr)
+}
+
+#help {
+    grid-column: span 3;
+}
+
+#questionText {
+    grid-row: span 3;
+    margin-bottom: 15px;
+}
+
+#questionAnswer {
+    border-top: 1px solid black;
+    padding-top: 25px;
+    grid-row: span 9;
+}
+
+.progressButton {
+    border-radius: 2px;
+    transition-duration: 0.3s;
+    transition-property: background-color, color, opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    color: #40c4ff;
+    opacity: 1;
+    display: block;
+    padding: 0.5rem 1rem;
 }

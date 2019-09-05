@@ -24,7 +24,7 @@ function startProgramHandler() {
 }
 
 var configPath = "";
-function selectConfigHandler() {
+/* function selectConfigHandler() {
 	var dialogPaths = dialog.showOpenDialogSync({
 		title: "Select Configuration File (sections.json)",
 		buttonLabel: "Use File",
@@ -43,7 +43,7 @@ function selectConfigHandler() {
 	}
 
 	$('#landingSelectedConfigPath').html(configPath);
-}
+} */
 
 function handleConfigs(sections) {
 	if(sections != null) {
@@ -74,13 +74,13 @@ function makeProgressPane() {
 		var sectionTitle = core.sections[i].sectionTitle;
 
 		var progressButton = document.createElement("a");
-		progressButton.className = "progressButton nav-link";
+		progressButton.className = "progressButton";
 		progressButton.innerHTML = sectionTitle;
 		progressButton.id = i;
 		progressButton.name = sectionTitle + "_button";
 		progressButton.addEventListener("click", progressButtonHandler)
 
-		var progressContent = document.getElementById('progressContent');
+		var progressContent = document.getElementById('navbar');
 		progressContent.appendChild(progressButton);
 	}
 }
@@ -99,7 +99,7 @@ function searchWarrantScript() {
 function addSingleLineInput(questionID, questionLabel) {
 	var label = document.createElement("div");
 
-	label.className = "singleLineInputFieldLabel w-100";
+	label.className = "singleLineInputFieldLabel";
 	label.id = questionID + "_label";
 	label.innerHTML += questionLabel;
 	answerDiv.appendChild(label);
@@ -120,7 +120,7 @@ function addSingleLineInput(questionID, questionLabel) {
 function addTextBoxInput(questionID, questionLabel, defaultText) {
 	var label = document.createElement("div");
 
-	label.className = "textBoxFieldInputLabel w-100";
+	label.className = "textBoxFieldInputLabel";
 	label.id = questionID + "_label";
 	label.innerHTML += questionLabel;
 	answerDiv.appendChild(label);
@@ -128,7 +128,7 @@ function addTextBoxInput(questionID, questionLabel, defaultText) {
 	var input = document.createElement("textarea");
 	input.type = "text";
 	input.wrap = "soft";
-	input.className = "textBoxFieldInput w-100"; // set the CSS class
+	input.className = "textBoxFieldInput"; // set the CSS class
 	input.id = questionID;
 
 	if(core.answers[questionID] != undefined && core.answers[questionID] != "") {
@@ -154,20 +154,20 @@ function addyesNoQuestion(questionID, questionLabel) {
 	label.innerHTML += questionLabel;
 
 	var buttonDiv = document.createElement("div");
-	buttonDiv.className = "my-3 btn-group";
+	buttonDiv.className = "questionButtonGroup";
 	buttonDiv.id = questionID + "_Group";
 
 	var yesButton = document.createElement("button");
 	yesButton.id = questionID + "_YesButton";
 	yesButton.name = questionID;
-	yesButton.className = "questionYesButton btn btn-secondary";
+	yesButton.className = "questionYesButton";
 	yesButton.innerHTML = "Yes";
 	yesButton.onclick = yesNoButtonHandler;
 
 	var noButton = document.createElement("button");
 	noButton.id = questionID + "_NoButton";
 	noButton.name = questionID;
-	noButton.className = "questionNoButton btn btn-secondary";
+	noButton.className = "questionNoButton";
 	noButton.innerHTML = "No";
 	noButton.onclick = yesNoButtonHandler;
 
@@ -188,7 +188,7 @@ function addyesNoQuestion(questionID, questionLabel) {
 function addSingleChoiceOption(questionID, questionLabel, options) {
 	var label = document.createElement("div");
 
-	label.className = "singleLineInputFieldLabel w-100";
+	label.className = "singleLineInputFieldLabel";
 	label.id = questionID + "_label";
 	label.innerHTML += questionLabel;
 	answerDiv.appendChild(label);
@@ -282,7 +282,7 @@ function progressButtonHandler() {
 function addSubmitButton() {
 	var button = document.createElement("button");
 	button.id = "submitButton";
-	button.className = "submitButton w-100 mt-3 btn btn-primary";
+	button.className = "submitButton";
 	button.innerHTML = "Save and Continue";
 	button.addEventListener("click", submitButtonHandler);
 	answerDiv.appendChild(button);
@@ -379,14 +379,14 @@ function loadHelpPane() {
 
 			// Create and append a text section
 			var text = document.createElement('div');
-			text.className = "helpText pb-3";
+			text.className = "helpText";
 			text.innerHTML = sectionHelp[i].helpContent;
 			$('#helpPane').append(text);
 
 		} else if(sectionHelp[i].helpType == "helpInsert") {
 			// Create and append a button along with the text it inserts
 			var insertWrapper = document.createElement("div");
-			insertWrapper.className = "insertWrapper pb-3";
+			insertWrapper.className = "insertWrapper";
 
 			var insertButton = document.createElement("button");
 			insertButton.id = "insertButton";
