@@ -13,6 +13,8 @@ const fs = require('fs')
 var answerDiv = document.getElementById("questionAnswer");
 var editor;
 
+var savePath = ""
+
 // on the landing panel, have a button where they can browse for a file
 function startProgramHandler() {
 	setMenu();
@@ -29,7 +31,7 @@ function setMenu() {
 					label: 'New',
 					accelerator: 'CmdOrCtrl+N',
 					click() {
-						console.log("New!")
+						editor.session.setValue("");
 					}
 				},
 				{
@@ -39,7 +41,21 @@ function setMenu() {
 					label: 'Open',
 					accelerator: 'CmdOrCtrl+O',
 					click() {
-						console.log("Open!");
+						dialog.showOpenDialog({
+							title: "Select Configuration File",
+							buttonLabel: "Use File",
+							properties: ["openFile"],
+							message: "Select the config file to use.",
+							filters: [
+								{name: 'Json', extensions: ['json']},
+								{name: 'All Files', extensions: ['*']}
+							]
+						}).then(function(value) {
+							fs.readFile(value.filePaths[0], 'utf8', (err, data) => {
+								if (err) throw err;
+								editor.setValue(data);
+							});
+						});
 					}
 				},
 				{
@@ -49,14 +65,41 @@ function setMenu() {
 					label: 'Save',
 					accelerator: 'CmdOrCtrl+S',
 					click() {
-						console.log('Save!');
+						if (!savePath) {
+							dialog.showSaveDialog({
+								title: "Save Document",
+								buttonLabel: "Save Document",
+								filters: [{name: 'json', extensions: ['json']}]
+							}).then(function(value) {
+								fs.writeFile(value.filePath, editor.getValue(), (err) => {
+									if (err) throw err;
+									console.log('Saved');
+								})
+								savePath = value.filePath;
+							});
+						} else {
+							fs.writeFile(savePath, editor.getValue(), (err) => {
+								if (err) throw err;
+								console.log('Saved');
+							})
+						}
 					}
 				},
 				{
 					label: 'Save As...',
 					accelerator: 'CmdOrCtrl+Shift+S',
 					click() {
-						console.log('Save As...!');
+						dialog.showSaveDialog({
+							title: "Save Document",
+							buttonLabel: "Save Document",
+							filters: [{name: 'json', extensions: ['json']}]
+						}).then(function(value) {
+							fs.writeFile(value.filePath, editor.getValue(), (err) => {
+								if (err) throw err;
+								console.log('Saved');
+							})
+							savePath = value.filePath;
+						});
 					}
 				}
 			]
