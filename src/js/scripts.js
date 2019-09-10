@@ -472,7 +472,7 @@ $('#REPL-button').click(function() {
 	}).then(function(value) {
 		fs.writeFile(value.filePath, editor.getValue(), (err) => {
 			if (err) throw err;
-			console.log('Saved')
+			console.log('Saved');
 		})
 	});
 });
