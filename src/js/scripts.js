@@ -9,41 +9,36 @@ var core = {
 }
 
 var answerDiv = document.getElementById("questionAnswer");
+var editor;
 
 // on the landing panel, have a button where they can browse for a file
 function startProgramHandler() {
 	jQuery('#landingPanel').fadeOut();
 
-	if(configPath == "") {
-		configPath = "../templates/sections.json";
-	}
+	startEditor();
 
-	$.getJSON(configPath, function(data) {
-		handleConfigs(data);
-    })
+	setTimeout(readCode, 5000);
 }
 
-var configPath = "";
-/* function selectConfigHandler() {
-	var dialogPaths = dialog.showOpenDialogSync({
-		title: "Select Configuration File (sections.json)",
-		buttonLabel: "Use File",
-		properties: ["openFile"],
-		message: "Select the sections.json to use. See documentation for more details.",
-		filters: [
-		    {name: 'Json', extensions: ['json']},
-		    {name: 'All Files', extensions: ['*']}
-		]
-	});
+function startEditor() {
+	editor = ace.edit("REPL");
+	editor.setTheme("ace/theme/tomorrow_night");
+	editor.setFontSize(14);
+	editor.session.setMode("ace/mode/json");
+}
 
-	if(dialogPaths != undefined && dialogPaths.length == 1) {
-		configPath = dialogPaths[0];
-	} else {
-		configPath = "../templates/sections.json";
+function readCode() {
+	var input = editor.getValue();
+
+	try {
+		var config = JSON.parse(input);
+		handleConfigs(config);
+	} catch (SyntaxError) {
+
 	}
 
-	$('#landingSelectedConfigPath').html(configPath);
-} */
+	setTimeout(readCode, 5000);
+}
 
 function handleConfigs(sections) {
 	if(sections != null) {
@@ -69,6 +64,7 @@ function setup() {
 }
 
 function makeProgressPane() {
+	$('#navbar').html("");
 	// For each section, make an append a button that loads its section
 	for(i in core.sections) {
 		var sectionTitle = core.sections[i].sectionTitle;
