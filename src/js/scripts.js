@@ -1,4 +1,4 @@
-const { dialog } = require('electron').remote
+const { globalShortcut, dialog } = require('electron').remote
 
 var core = {
 	sections : null,
@@ -13,11 +13,9 @@ var editor;
 
 // on the landing panel, have a button where they can browse for a file
 function startProgramHandler() {
-	jQuery('#landingPanel').fadeOut();
-
 	startEditor();
 
-	setTimeout(readCode, 5000);
+	setTimeout(readEditor, 5000);
 }
 
 function startEditor() {
@@ -27,7 +25,7 @@ function startEditor() {
 	editor.session.setMode("ace/mode/json");
 }
 
-function readCode() {
+function readEditor() {
 	var input = editor.getValue();
 
 	try {
@@ -37,7 +35,7 @@ function readCode() {
 
 	}
 
-	setTimeout(readCode, 5000);
+	setTimeout(readEditor, 5000);
 }
 
 function handleConfigs(sections) {
