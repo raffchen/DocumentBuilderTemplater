@@ -8,6 +8,8 @@ var core = {
 	currentSectionIndex : 0
 }
 
+const fs = require('fs')
+
 var answerDiv = document.getElementById("questionAnswer");
 var editor;
 
@@ -459,4 +461,18 @@ const shell = require('electron').shell;
 $(document).on('click', 'a[href^="http"]', function(event) {
     event.preventDefault();
     shell.openExternal(this.href);
+});
+
+// open save dialog
+$('#REPL-button').click(function() {
+	dialog.showSaveDialog({
+		title: "Save Document",
+		buttonLabel: "Save Document",
+		filters: [{name: 'json', extensions: ['json']}]
+	}).then(function(value) {
+		fs.writeFile(value.filePath, editor.getValue(), (err) => {
+			if (err) throw err;
+			console.log('Saved')
+		})
+	});
 });
