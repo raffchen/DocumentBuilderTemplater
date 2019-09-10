@@ -31,6 +31,7 @@ function setMenu() {
 					label: 'New',
 					accelerator: 'CmdOrCtrl+N',
 					click() {
+						clear();
 						editor.session.setValue("");
 					}
 				},
@@ -156,6 +157,13 @@ function setMenu() {
 
 	const menu = Menu.buildFromTemplate(template)
 	Menu.setApplicationMenu(menu)
+}
+
+function clear() {
+	$('#navbar').empty();
+	$('#questionText').empty();
+	$('#questionAnswer').empty();
+	$('#help').empty();
 }
 
 function startEditor() {
