@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require('electron')
+const { app, BrowserWindow } = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -8,6 +8,8 @@ function createWindow () {
 	win = new BrowserWindow({ width: 1500, height: 600, webPreferences: {nodeIntegration: true} })
 	
 	win.loadFile(__dirname + '/index.html')
+
+	win.removeMenu();
 	
 	win.on('closed', () => {
 		win = null;
