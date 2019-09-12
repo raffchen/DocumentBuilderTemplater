@@ -247,3 +247,14 @@ textarea {
     left: 0;
     resize: vertical;
 }
+
+.selector {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.selector:hover {
+    outline: 3px solid orange;
+    background-color: rgba(255, 165, 0, 0.6);
+}
