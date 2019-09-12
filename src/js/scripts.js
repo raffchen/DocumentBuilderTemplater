@@ -235,38 +235,45 @@ function searchWarrantScript() {
 
 // This function creates and appends a single input line with a label
 function addSingleLineInput(questionID, questionLabel) {
+	var selector = document.createElement("button");
+	selector.className = "selector";
+
 	var label = document.createElement("div");
 	
 	label.className = "singleLineInputFieldLabel";
 	label.id = questionID + "_label";
 	label.innerHTML += questionLabel;
-	answerDiv.appendChild(label);
 	
 	var input = document.createElement("input");
 	input.type = "text";
-	input.className = "singleLineInputField"; // set the CSS class
+	input.className = "singleLineInputField";
 	input.id = questionID;
 	
 	if(core.answers[questionID] != undefined && core.answers[questionID] != "") {
 		input.value = core.answers[questionID];
 	}
 	
-	answerDiv.appendChild(input); // put it into the DOM
+	selector.appendChild(label);
+	selector.appendChild(input);
+
+	answerDiv.appendChild(selector); 
 }
 
 // This function creates and appends a text box input with default text if given
 function addTextBoxInput(questionID, questionLabel, defaultText) {
+	var selector = document.createElement("button");
+	selector.className = "selector";
+
 	var label = document.createElement("div");
 	
 	label.className = "textBoxFieldInputLabel";
 	label.id = questionID + "_label";
 	label.innerHTML += questionLabel;
-	answerDiv.appendChild(label);
 	
 	var input = document.createElement("textarea");
 	input.type = "text";
 	input.wrap = "soft";
-	input.className = "textBoxFieldInput"; // set the CSS class
+	input.className = "textBoxFieldInput"; 
 	input.id = questionID;
 	
 	if(core.answers[questionID] != undefined && core.answers[questionID] != "") {
@@ -274,8 +281,11 @@ function addTextBoxInput(questionID, questionLabel, defaultText) {
 	} else if(defaultText != null) {
 		input.value = defaultText;
 	}
+
+	selector.appendChild(label);
+	selector.appendChild(input);
 	
-	answerDiv.appendChild(input); // put it into the DOM
+	answerDiv.appendChild(selector);
 	resizeTextarea();
 }
 
@@ -287,6 +297,9 @@ function resizeTextarea() {
 
 // This function creates and appends a yes/no question that will toggle the section
 function addyesNoQuestion(questionID, questionLabel) {
+	var selector = document.createElement("button");
+	selector.className = "selector";
+
 	var label = document.createElement("div");
 	label.className = "textBoxFieldInputLabel";
 	label.innerHTML += questionLabel;
@@ -318,18 +331,22 @@ function addyesNoQuestion(questionID, questionLabel) {
 	buttonDiv.appendChild(noButton); 
 	buttonDiv.appendChild(yesButton);
 	
-	answerDiv.appendChild(label);
-	answerDiv.appendChild(buttonDiv);
+	selector.appendChild(label);
+	selector.appendChild(buttonDiv);
+
+	answerDiv.appendChild(selector);
 }
 
 // This function creates a multiple choice question that only allows for one selected answer
 function addSingleChoiceOption(questionID, questionLabel, options) {
+	var selector = document.createElement("button");
+	selector.className = "selector";
+
 	var label = document.createElement("div");
 	
 	label.className = "singleLineInputFieldLabel";
 	label.id = questionID + "_label";
 	label.innerHTML += questionLabel;
-	answerDiv.appendChild(label);
 	
 	var form = document.createElement("form");
 	form.id = questionID;
@@ -350,7 +367,10 @@ function addSingleChoiceOption(questionID, questionLabel, options) {
 		form.appendChild(wrapper);
 	}
 	
-	answerDiv.appendChild(form);
+	selector.appendChild(label);
+	selector.appendChild(form);
+
+	answerDiv.appendChild(selector);
 }
 
 function yesNoButtonHandler() {
@@ -397,8 +417,8 @@ function yesNoButtonHandler() {
 	for(i in sectionInputs) {
 		if(i > sectionInputs.findIndex(element => element.questionID == questionID)) {
 			var sectionInput = sectionInputs[i];
-			$('#' + sectionInput.questionID).remove();
-			$(`#${sectionInput.questionID}_label`).remove();
+			$('#' + sectionInput.questionID).parent().remove();
+			$(`#${sectionInput.questionID}_label`).parent().remove();
 		}
 	}
 }
@@ -507,21 +527,30 @@ function loadHelpPane() {
 	
 	for(var i in sectionHelp) {
 		if(sectionHelp[i].helpType == "helpText") {
-			if(sectionHelp[i].helpTitle != "") {
-				// Create and append a title section
-				var title = document.createElement('div');
-				title.className = "helpTitle";
-				title.innerHTML = sectionHelp[i].helpTitle;
-				$('#help').append(title);
-			}
+			var selector = document.createElement("button");
+			selector.className = "selector";
+
+			// Create and append a title section
+			var title = document.createElement('div');
+			title.className = "helpTitle";
+			title.innerHTML = sectionHelp[i].helpTitle;
 			
 			// Create and append a text section
 			var text = document.createElement('div');
 			text.className = "helpText";
 			text.innerHTML = sectionHelp[i].helpContent;
-			$('#help').append(text);
+			
+			if (title.innerHTML != "") {
+				selector.appendChild(title);
+			}
+			selector.appendChild(text);
+
+			$("#help").append(selector);			
 			
 		} else if(sectionHelp[i].helpType == "helpInsert") {
+			var selector = document.createElement("button");
+			selector.className = "selector";
+
 			// Create and append a button along with the text it inserts
 			var insertWrapper = document.createElement("div");
 			insertWrapper.className = "insertWrapper";
@@ -539,8 +568,10 @@ function loadHelpPane() {
 			insertText.className = "insertText";
 			insertText.innerHTML = sectionHelp[i].helpContent;
 			insertWrapper.appendChild(insertText);
+
+			selector.appendChild(insertWrapper);
 			
-			$('#help').append(insertWrapper);
+			$('#help').append(selector);
 		}
 	}
 }
