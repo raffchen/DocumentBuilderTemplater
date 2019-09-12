@@ -190,7 +190,7 @@ html, body {
     padding: 0.5rem 1rem;
 }
 
-.progressButton.active {
+.progressButton.pactive {
     color: #40c4ff;
     opacity: 1;
 }
