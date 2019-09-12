@@ -475,6 +475,7 @@ function loadSection(sectionIndex) {
 	$('#questionText').empty();
 	$('#questionAnswer').empty();
 	$('#help').empty();
+	$('#editor').empty();
 	
 	var goodToGo = true;
 	if(targetSection.sectionConditions.length > 0) {
@@ -489,6 +490,8 @@ function loadSection(sectionIndex) {
 	if(goodToGo) {
 		// set the question text
 		$('#questionText').html(targetSection.sectionText);
+
+		loadPropertyEditor(targetSection);
 		
 		// loop through the inputs and make each thing
 		for(index in targetSection.sectionInputs) {
@@ -517,6 +520,27 @@ function loadSection(sectionIndex) {
 		$('#questionText').html(reason);
 		addSubmitButton();
 	}
+}
+
+function loadPropertyEditor(section) {
+	var itemEditor = document.getElementById("editor");
+
+	var sectionTitle = document.createElement("input");
+	sectionTitle.setAttribute("type", "text");
+	sectionTitle.value = section.sectionTitle;
+	sectionTitle.oninput = function() {
+		console.log("Hello");
+	};
+
+	var sectionText = document.createElement("input");
+	sectionText.setAttribute("type", "text");
+	sectionText.value = section.sectionText;
+	sectionText.oninput = function() {
+		console.log("Hello");
+	};
+
+	itemEditor.appendChild(sectionTitle);
+	itemEditor.appendChild(sectionText);
 }
 
 function loadHelpPane() {

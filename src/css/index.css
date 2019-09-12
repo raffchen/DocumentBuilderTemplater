@@ -21,16 +21,17 @@ html, body {
 #REPL {
     width: 100%;
     height: 100%;
+    display: none;
 }
 
 #editor {
     width: 100%;
     height: 100%;
-    display: none;
 }
 
 #REPL-navbar {
     font-size: 0;
+    border-bottom: 1px solid rgb(204, 204, 204);
 }
 
 #REPL-navbar button {
@@ -87,7 +88,7 @@ html, body {
 
 #navbar {
     height: 100%;
-    box-shadow: 5px 0px 5px #f1f1f1;
+    box-shadow: 5px 0px 5px #f1f1f1, -5px 0px 5px #f1f1f1;
     grid-column: span 2;
 }
 
