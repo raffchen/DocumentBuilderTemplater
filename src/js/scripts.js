@@ -649,3 +649,24 @@ $('#REPL-button').click(function() {
 		})
 	});
 });
+
+// tab switcher
+$('#editor-button').click(function() {
+	$('#REPL').hide();
+	$('#editor').show();
+
+	if ($('#code-button').hasClass('active')) {
+		$('#code-button').toggleClass('active');
+		$('#editor-button').toggleClass('active');
+	}
+});
+
+$('#code-button').click(function() {
+	$('#editor').hide();
+	$('#REPL').show();
+
+	if ($('#editor-button').hasClass('active')) {
+		$('#code-button').toggleClass('active');
+		$('#editor-button').toggleClass('active');
+	}
+});

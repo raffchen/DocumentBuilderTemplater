@@ -21,9 +21,35 @@ html, body {
 #REPL {
     width: 100%;
     height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
+}
+
+#editor {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+#REPL-navbar {
+    font-size: 0;
+}
+
+#REPL-navbar button {
+    background-color: rgb(238, 238, 238);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0.5rem 0.5rem;
+    transition: 0.3s;
+    font-size: 14px;
+    width: 5rem;
+}
+
+#REPL-navbar button:hover {
+    background-color: rgb(221, 221, 221);
+}
+
+#REPL-navbar button.active {
+    background-color: rgb(204, 204, 204);
 }
 
 #REPL-button {
