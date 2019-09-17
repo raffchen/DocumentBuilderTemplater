@@ -18,8 +18,6 @@ var savePath = ""
 // on the landing panel, have a button where they can browse for a file
 function startProgramHandler() {
 	setMenu();
-	
-	startEditor();
 }
 
 function setMenu() {
@@ -54,8 +52,15 @@ function setMenu() {
 						}).then(function(value) {
 							fs.readFile(value.filePaths[0], 'utf8', (err, data) => {
 								if (err) throw err;
-								editor.setValue(data);
+
+								try {
+									core.sections = JSON.parse(data);
+								} catch (err) {
+									if (err) throw err;
+								}
 								
+								makeProgressPane();
+
 								loadSection(core.currentSectionIndex);
 							});
 						});
@@ -74,7 +79,7 @@ function setMenu() {
 								buttonLabel: "Save Document",
 								filters: [{name: 'json', extensions: ['json']}]
 							}).then(function(value) {
-								fs.writeFile(value.filePath, editor.getValue(), (err) => {
+								fs.writeFile(value.filePath, JSON.stringify(core.sections), (err) => {
 									if (err) throw err;
 									console.log('Saved');
 								})
@@ -97,7 +102,7 @@ function setMenu() {
 							buttonLabel: "Save Document",
 							filters: [{name: 'json', extensions: ['json']}]
 						}).then(function(value) {
-							fs.writeFile(value.filePath, editor.getValue(), (err) => {
+							fs.writeFile(value.filePath, JSON.stringify(core.sections), (err) => {
 								if (err) throw err;
 								console.log('Saved');
 							})
@@ -166,26 +171,6 @@ function clear() {
 	$('#questionText').empty();
 	$('#questionAnswer').empty();
 	$('#help').empty();
-}
-
-function startEditor() {
-	editor = ace.edit("REPL");
-	editor.setTheme("ace/theme/tomorrow_night");
-	editor.setFontSize(14);
-	editor.session.setUseWrapMode(true);
-	editor.session.setMode("ace/mode/json");
-	editor.session.on('change', function(delta) {
-		try {
-			var config = JSON.parse(editor.getValue());
-			core.sections = config;
-			
-			makeProgressPane();
-
-			ploadSection(core.currentSectionIndex);
-		} catch (e) {
-			
-		}
-	});
 }
 
 function handleConfigs(sections) {
@@ -486,56 +471,6 @@ function loadSection(sectionIndex) {
 	$('#editor').empty();
 
 	loadPropertyEditor(targetSection);
-	
-	var goodToGo = true;
-	if(targetSection.sectionConditions.length > 0) {
-		// then there is a condition we must be aware of
-		for(i in targetSection.sectionConditions) {
-			if(!core.answers[targetSection.sectionConditions[i]]) {
-				goodToGo = false;
-			}
-		}
-	}
-	
-	if(goodToGo) {
-		// set the question text
-		$('#questionText').html(targetSection.sectionText);
-		
-		// loop through the inputs and make each thing
-		for(index in targetSection.sectionInputs) {
-			if(targetSection.sectionInputs[index].inputType == "singleLineText") {
-				addSingleLineInput(targetSection.sectionInputs[index].questionID, targetSection.sectionInputs[index].inputLabel);
-				
-			} else if(targetSection.sectionInputs[index].inputType == "textBoxInput") {
-				addTextBoxInput(targetSection.sectionInputs[index].questionID, targetSection.sectionInputs[index].inputLabel, targetSection.sectionInputs[index].defaultText);
-				
-			} else if(targetSection.sectionInputs[index].inputType == "yesNoQuestion") {
-				addyesNoQuestion(targetSection.sectionInputs[index].questionID, targetSection.sectionInputs[index].inputLabel);
-				if(core.answers[targetSection.sectionInputs[index].questionID] == undefined || !core.answers[targetSection.sectionInputs[index].questionID]) {
-					break;
-				}
-				
-			} else if(targetSection.sectionInputs[index].inputType == "singleChoiceOption") {
-				addSingleChoiceOption(targetSection.sectionInputs[index].questionID, targetSection.sectionInputs[index].inputLabel, targetSection.sectionInputs[index].radioOptions)
-			}
-		}
-		
-		addSubmitButton();
-		loadHelpPane();
-	} else {
-		// cannot load this section due to a previous choice. tell them that.
-		var reason = targetSection.sectionConditionsFalse;
-		$('#questionText').html(reason);
-		addSubmitButton();
-	}
-}
-
-function ploadSection(sectionIndex) {
-	var targetSection = core.sections[sectionIndex];
-	// clear the screen
-	$('#questionText').empty();
-	$('#questionAnswer').empty();
-	$('#help').empty();
 	
 	var goodToGo = true;
 	if(targetSection.sectionConditions.length > 0) {
