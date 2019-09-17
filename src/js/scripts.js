@@ -58,7 +58,7 @@ function setMenu() {
 								} catch (err) {
 									if (err) throw err;
 								}
-								
+
 								makeProgressPane();
 
 								loadSection(core.currentSectionIndex);
@@ -79,7 +79,7 @@ function setMenu() {
 								buttonLabel: "Save Document",
 								filters: [{name: 'json', extensions: ['json']}]
 							}).then(function(value) {
-								fs.writeFile(value.filePath, JSON.stringify(core.sections), (err) => {
+								fs.writeFile(value.filePath, JSON.stringify(core.sections, null, '\t'), (err) => {
 									if (err) throw err;
 									console.log('Saved');
 								})
@@ -102,7 +102,7 @@ function setMenu() {
 							buttonLabel: "Save Document",
 							filters: [{name: 'json', extensions: ['json']}]
 						}).then(function(value) {
-							fs.writeFile(value.filePath, JSON.stringify(core.sections), (err) => {
+							fs.writeFile(value.filePath, JSON.stringify(core.sections, null, '\t'), (err) => {
 								if (err) throw err;
 								console.log('Saved');
 							})
