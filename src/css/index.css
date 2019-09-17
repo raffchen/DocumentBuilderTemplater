@@ -73,12 +73,26 @@ html, body {
 }
 
 #REPL-button:hover {
+    bottom: 1.1rem;
     background-color: rgb(197, 27, 30);
 }
 
 #REPL-button:active {
     background-color: rgb(160, 22, 24);
     box-shadow: 0 3px 0 #141617;
+}
+
+.section-editor {
+    text-align: center;
+}
+
+.section-editor div {
+    font-size: 14px;
+}
+
+.section-editor input, .section-editor textarea {
+    width: 75%;
+    margin-bottom: 1rem;
 }
 
 #navbar-wrapper {

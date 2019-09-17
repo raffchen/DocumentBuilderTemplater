@@ -516,25 +516,36 @@ function loadSection(sectionIndex) {
 }
 
 function loadPropertyEditor(section) {
-	var itemEditor = document.getElementById("editor");
+	var editor = document.getElementById("editor");
+
+	var sectionEditor = document.createElement("div");
+	sectionEditor.className = "section-editor"
+
+	var sectionTitleDiv = document.createElement("div");
+	sectionTitleDiv.innerHTML = "Section Title: ";
 
 	var sectionTitle = document.createElement("input");
 	sectionTitle.setAttribute("type", "text");
 	sectionTitle.value = section.sectionTitle;
 	sectionTitle.oninput = function() {
 		core.sections[core.currentSectionIndex].sectionTitle = sectionTitle.value;
-		editor.setValue(JSON.stringify(core.sections, null, '\t'));
 	};
 
-	var sectionText = document.createElement("input");
-	sectionText.setAttribute("type", "text");
+	var sectionTextDiv = document.createElement("div");
+	sectionTextDiv.innerHTML = "Section Info: ";
+
+	var sectionText = document.createElement("textarea");
 	sectionText.value = section.sectionText;
 	sectionText.oninput = function() {
 		console.log("Hello");
 	};
 
-	itemEditor.appendChild(sectionTitle);
-	itemEditor.appendChild(sectionText);
+	sectionEditor.appendChild(sectionTitleDiv);
+	sectionEditor.appendChild(sectionTitle);
+	sectionEditor.appendChild(sectionTextDiv);
+	sectionEditor.appendChild(sectionText);
+
+	editor.appendChild(sectionEditor);
 }
 
 function loadHelpPane() {
