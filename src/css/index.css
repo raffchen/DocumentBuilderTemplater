@@ -97,8 +97,8 @@ html, body {
 
 .section-editor textarea {
     height: 3rem;
-    max-height: 10rem;
-    resize: none;
+    max-height: 6rem;
+    resize: vertical;
 }
 
 #navbar-wrapper {
