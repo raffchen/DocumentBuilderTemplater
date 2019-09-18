@@ -95,6 +95,12 @@ html, body {
     margin-bottom: 1rem;
 }
 
+.section-editor textarea {
+    height: 3rem;
+    max-height: 10rem;
+    resize: none;
+}
+
 #navbar-wrapper {
     grid-column: span 2;
     padding-right: 2vh;

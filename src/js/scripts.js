@@ -283,7 +283,7 @@ function addTextBoxInput(questionID, questionLabel, defaultText) {
 }
 
 function resizeTextarea() {
-	$('textarea').each(function () {
+	$('textarea').not(".resize-exclude", function () {
 		this.setAttribute('style', 'height:' + (this.scrollHeight + 3) + 'px;overflow-y:auto;');
 	});
 }
@@ -529,6 +529,7 @@ function loadPropertyEditor(section) {
 	sectionTitle.value = section.sectionTitle;
 	sectionTitle.oninput = function() {
 		core.sections[core.currentSectionIndex].sectionTitle = sectionTitle.value;
+		$(`#${core.currentSectionIndex}`).html(sectionTitle.value);
 	};
 
 	var sectionTextDiv = document.createElement("div");
@@ -536,8 +537,10 @@ function loadPropertyEditor(section) {
 
 	var sectionText = document.createElement("textarea");
 	sectionText.value = section.sectionText;
+	sectionText.className = "resize-exclude";
 	sectionText.oninput = function() {
-		console.log("Hello");
+		core.sections[core.currentSectionIndex].sectionText = sectionText.value;
+		$('#questionText').html(sectionText.value);
 	};
 
 	sectionEditor.appendChild(sectionTitleDiv);
