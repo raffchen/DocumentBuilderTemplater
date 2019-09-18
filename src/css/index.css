@@ -68,7 +68,7 @@ html, body {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-color: rgb(237, 32, 36);
-    box-shadow: 0px 5px 10px #141617;
+    box-shadow: 0px 3px 8px #7f7f7f;
     transition: all ease 0.3s;
 }
 
@@ -79,7 +79,7 @@ html, body {
 
 #REPL-button:active {
     background-color: rgb(160, 22, 24);
-    box-shadow: 0 3px 0 #141617;
+    box-shadow: 0 3px 1px #7f7f7f;
 }
 
 .section-editor {

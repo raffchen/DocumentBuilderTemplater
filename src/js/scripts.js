@@ -30,7 +30,6 @@ function setMenu() {
 					accelerator: 'CmdOrCtrl+N',
 					click() {
 						clear();
-						editor.session.setValue("");
 					}
 				},
 				{
@@ -171,6 +170,7 @@ function clear() {
 	$('#questionText').empty();
 	$('#questionAnswer').empty();
 	$('#help').empty();
+	$('#editor').empty();
 }
 
 function handleConfigs(sections) {
