@@ -1,7 +1,7 @@
 const { dialog, Menu } = require('electron').remote
 
 var core = {
-	sections : null,
+	sections : [],
 	answers : {},
 	answerInserts : {},
 	finalInserts : {},
@@ -17,6 +17,8 @@ var savePath = ""
 // on the landing panel, have a button where they can browse for a file
 function startProgramHandler() {
 	setMenu();
+	
+	addSectionButton();
 }
 
 function setMenu() {
@@ -213,6 +215,8 @@ function makeProgressPane() {
 	}
 
 	$(`#${core.currentSectionIndex}`).addClass("pactive");
+
+	addSectionButton();
 }
 
 function searchWarrantScript() {
@@ -456,7 +460,6 @@ function submitButtonHandler() {
 	if(core.currentSectionIndex >= core.sections.length) {
 		// here we should display a confirmation dialog and if they confirm, write the data to the sheet and end the program
 		$('#submitButton').html("Submit and Make Document");
-		$('#submitButton').width("200px");
 	} else if(core.currentSectionIndex == core.sections.length-1) {
 		// We are on the LAST section
 		loadSection(core.currentSectionIndex, answerDiv);
@@ -516,14 +519,63 @@ function loadSection(sectionIndex) {
 			}
 		}
 		
+		addQuestionButton();
 		addSubmitButton();
 		loadHelpPane();
 	} else {
 		// cannot load this section due to a previous choice. tell them that.
 		var reason = targetSection.sectionConditionsFalse;
 		$('#questionText').html(reason);
+		addQuestionButton();
 		addSubmitButton();
 	}
+}
+
+class Counter {
+	constructor() {
+		this.i = 0;
+	}
+
+	get num() {
+		this.i++;
+		return this.i;
+	}
+}
+
+var counter = new Counter();
+function addSectionButton() {
+	var navbar = document.getElementById("navbar");
+
+	var button = document.createElement("button");
+	button.innerHTML = "Add Section";
+	button.onclick = function() {
+		var section = {sectionTitle: `Section ${counter.num}`, sectionText: "", sectionInputs: [], sectionHelp: [], sectionConditions: []};
+
+		core.sections.push(section);
+		core.currentSectionIndex = core.sections.length - 1;
+	
+		makeProgressPane();
+	}
+
+	navbar.appendChild(button);
+
+	loadSection(core.currentSectionIndex);
+}
+
+function addQuestionButton() {
+	var main = document.getElementById("questionAnswer");
+
+	var button = document.createElement("button");
+	button.innerHTML = "Add Question";
+	button.onclick = function() {
+		var editor = document.getElementById("item-editor");
+		// while (editor.firstChild) {
+		// 	editor.removeChild(editor.firstChild);
+		// }
+		console.log('Click!');
+	}
+
+	main.appendChild(button);
 }
 
 function loadSectionEditor(section) {
@@ -558,42 +610,42 @@ function loadSectionEditor(section) {
 }
 
 function loadItemEditor(obj) {
-	var editor = document.getElementById("item-editor");
-	while (editor.firstChild) {
-		editor.removeChild(editor.firstChild);
-	}
+	// var editor = document.getElementById("item-editor");
+	// while (editor.firstChild) {
+	// 	editor.removeChild(editor.firstChild);
+	// }
 
-	for (var i = 0; i < obj.children.length; i++) {
-		if (obj.children[i].className === "helpTitle") {
-			var title = document.createElement("div");
-			title.innerHTML = "Help Title: ";
+	// for (var i = 0; i < obj.children.length; i++) {
+	// 	if (obj.children[i].className === "helpTitle") {
+	// 		var title = document.createElement("div");
+	// 		title.innerHTML = "Help Title: ";
 
-			var input = document.createElement("input");
-			input.type = "text";
-			input.link = obj.children[i];
-			input.value = obj.children[i].innerHTML;
-			input.oninput = function() {
-				this.link.innerHTML = this.value;
-			}
+	// 		var input = document.createElement("input");
+	// 		input.type = "text";
+	// 		input.link = obj.children[i];
+	// 		input.value = obj.children[i].innerHTML;
+	// 		input.oninput = function() {
+	// 			this.link.innerHTML = this.value;
+	// 		}
 
-			editor.appendChild(title);
-			editor.appendChild(input);
-		} 
-		else if (obj.children[i].className === "helpText") {
-			var title = document.createElement("div");
-			title.innerHTML = "Help Text: ";
+	// 		editor.appendChild(title);
+	// 		editor.appendChild(input);
+	// 	} 
+	// 	else if (obj.children[i].className === "helpText") {
+	// 		var title = document.createElement("div");
+	// 		title.innerHTML = "Help Text: ";
 
-			var input = document.createElement("textarea");
-			input.link = obj.children[i];
-			input.value = obj.children[i].innerHTML;
-			input.oninput = function() {
-				this.link.innerHTML = this.value;
-			}
+	// 		var input = document.createElement("textarea");
+	// 		input.link = obj.children[i];
+	// 		input.value = obj.children[i].innerHTML;
+	// 		input.oninput = function() {
+	// 			this.link.innerHTML = this.value;
+	// 		}
 
-			editor.appendChild(title);
-			editor.appendChild(input);
-		}
-	}
+	// 		editor.appendChild(title);
+	// 		editor.appendChild(input);
+	// 	}
+	// }
 }
 
 function loadHelpPane() {
