@@ -11,7 +11,6 @@ var core = {
 const fs = require('fs')
 
 var answerDiv = document.getElementById("questionAnswer");
-var editor;
 
 var savePath = ""
 
@@ -232,7 +231,7 @@ function addSingleLineInput(questionID, questionLabel) {
 	selector.className = "selector";
 	selector.addEventListener('click', function() {
 		loadItemEditor(this);
-	})
+	});
 
 	var label = document.createElement("div");
 	
@@ -261,7 +260,7 @@ function addTextBoxInput(questionID, questionLabel, defaultText) {
 	selector.className = "selector";
 	selector.addEventListener('click', function() {
 		loadItemEditor(this);
-	})
+	});
 
 	var label = document.createElement("div");
 	
@@ -300,7 +299,7 @@ function addyesNoQuestion(questionID, questionLabel) {
 	selector.className = "selector";
 	selector.addEventListener('click', function() {
 		loadItemEditor(this);
-	})
+	});
 
 	var label = document.createElement("div");
 	label.className = "textBoxFieldInputLabel";
@@ -345,7 +344,7 @@ function addSingleChoiceOption(questionID, questionLabel, options) {
 	selector.className = "selector";
 	selector.addEventListener('click', function() {
 		loadItemEditor(this);
-	})
+	});
 
 	var label = document.createElement("div");
 	
@@ -559,7 +558,42 @@ function loadSectionEditor(section) {
 }
 
 function loadItemEditor(obj) {
-	console.log(obj.children);
+	var editor = document.getElementById("item-editor");
+	while (editor.firstChild) {
+		editor.removeChild(editor.firstChild);
+	}
+
+	for (var i = 0; i < obj.children.length; i++) {
+		if (obj.children[i].className === "helpTitle") {
+			var title = document.createElement("div");
+			title.innerHTML = "Help Title: ";
+
+			var input = document.createElement("input");
+			input.type = "text";
+			input.link = obj.children[i];
+			input.value = obj.children[i].innerHTML;
+			input.oninput = function() {
+				this.link.innerHTML = this.value;
+			}
+
+			editor.appendChild(title);
+			editor.appendChild(input);
+		} 
+		else if (obj.children[i].className === "helpText") {
+			var title = document.createElement("div");
+			title.innerHTML = "Help Text: ";
+
+			var input = document.createElement("textarea");
+			input.link = obj.children[i];
+			input.value = obj.children[i].innerHTML;
+			input.oninput = function() {
+				this.link.innerHTML = this.value;
+			}
+
+			editor.appendChild(title);
+			editor.appendChild(input);
+		}
+	}
 }
 
 function loadHelpPane() {
@@ -598,7 +632,7 @@ function loadHelpPane() {
 			selector.className = "selector";
 			selector.addEventListener('click', function() {
 				loadItemEditor(this);
-			})
+			});
 
 			// Create and append a button along with the text it inserts
 			var insertWrapper = document.createElement("div");
