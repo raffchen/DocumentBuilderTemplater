@@ -86,7 +86,7 @@ function setMenu() {
 								savePath = value.filePath;
 							});
 						} else {
-							fs.writeFile(savePath, editor.getValue(), (err) => {
+							fs.writeFile(savePath, JSON.stringify(core.sections, null, '\t'), (err) => {
 								if (err) throw err;
 								console.log('Saved');
 							})
@@ -778,7 +778,7 @@ $('#REPL-button').click(function() {
 		buttonLabel: "Save Document",
 		filters: [{name: 'json', extensions: ['json']}]
 	}).then(function(value) {
-		fs.writeFile(value.filePath, editor.getValue(), (err) => {
+		fs.writeFile(value.filePath, JSON.stringify(core.sections, null, '\t'), (err) => {
 			if (err) throw err;
 			console.log('Saved');
 		})
