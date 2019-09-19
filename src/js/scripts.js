@@ -170,7 +170,7 @@ function clear() {
 	$('#questionText').empty();
 	$('#questionAnswer').empty();
 	$('#help').empty();
-	$('#editor').empty();
+	$('#section-editor').empty();
 }
 
 function handleConfigs(sections) {
@@ -230,6 +230,9 @@ function searchWarrantScript() {
 function addSingleLineInput(questionID, questionLabel) {
 	var selector = document.createElement("button");
 	selector.className = "selector";
+	selector.addEventListener('click', function() {
+		loadItemEditor(this);
+	})
 
 	var label = document.createElement("div");
 	
@@ -256,6 +259,9 @@ function addSingleLineInput(questionID, questionLabel) {
 function addTextBoxInput(questionID, questionLabel, defaultText) {
 	var selector = document.createElement("button");
 	selector.className = "selector";
+	selector.addEventListener('click', function() {
+		loadItemEditor(this);
+	})
 
 	var label = document.createElement("div");
 	
@@ -292,6 +298,9 @@ function resizeTextarea() {
 function addyesNoQuestion(questionID, questionLabel) {
 	var selector = document.createElement("button");
 	selector.className = "selector";
+	selector.addEventListener('click', function() {
+		loadItemEditor(this);
+	})
 
 	var label = document.createElement("div");
 	label.className = "textBoxFieldInputLabel";
@@ -334,6 +343,9 @@ function addyesNoQuestion(questionID, questionLabel) {
 function addSingleChoiceOption(questionID, questionLabel, options) {
 	var selector = document.createElement("button");
 	selector.className = "selector";
+	selector.addEventListener('click', function() {
+		loadItemEditor(this);
+	})
 
 	var label = document.createElement("div");
 	
@@ -468,9 +480,9 @@ function loadSection(sectionIndex) {
 	$('#questionText').empty();
 	$('#questionAnswer').empty();
 	$('#help').empty();
-	$('#editor').empty();
+	$('#section-editor').empty();
 
-	loadPropertyEditor(targetSection);
+	loadSectionEditor(targetSection);
 	
 	var goodToGo = true;
 	if(targetSection.sectionConditions.length > 0) {
@@ -515,11 +527,8 @@ function loadSection(sectionIndex) {
 	}
 }
 
-function loadPropertyEditor(section) {
-	var editor = document.getElementById("editor");
-
-	var sectionEditor = document.createElement("div");
-	sectionEditor.className = "section-editor"
+function loadSectionEditor(section) {
+	var sectionEditor = document.getElementById("section-editor");
 
 	var sectionTitleDiv = document.createElement("div");
 	sectionTitleDiv.innerHTML = "Section Title: ";
@@ -547,8 +556,10 @@ function loadPropertyEditor(section) {
 	sectionEditor.appendChild(sectionTitle);
 	sectionEditor.appendChild(sectionTextDiv);
 	sectionEditor.appendChild(sectionText);
+}
 
-	editor.appendChild(sectionEditor);
+function loadItemEditor(obj) {
+	console.log(obj.children);
 }
 
 function loadHelpPane() {
@@ -561,6 +572,9 @@ function loadHelpPane() {
 		if(sectionHelp[i].helpType == "helpText") {
 			var selector = document.createElement("button");
 			selector.className = "selector";
+			selector.addEventListener('click', function() {
+				loadItemEditor(this);
+			})
 
 			// Create and append a title section
 			var title = document.createElement('div');
@@ -582,6 +596,9 @@ function loadHelpPane() {
 		} else if(sectionHelp[i].helpType == "helpInsert") {
 			var selector = document.createElement("button");
 			selector.className = "selector";
+			selector.addEventListener('click', function() {
+				loadItemEditor(this);
+			})
 
 			// Create and append a button along with the text it inserts
 			var insertWrapper = document.createElement("div");

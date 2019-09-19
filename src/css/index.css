@@ -82,20 +82,20 @@ html, body {
     box-shadow: 0 3px 1px #7f7f7f;
 }
 
-.section-editor {
+#section-editor {
     text-align: center;
 }
 
-.section-editor div {
+#section-editor div {
     font-size: 14px;
 }
 
-.section-editor input, .section-editor textarea {
+#section-editor input, #section-editor textarea {
     width: 75%;
     margin-bottom: 1rem;
 }
 
-.section-editor textarea {
+#section-editor textarea {
     height: 3rem;
     max-height: 6rem;
     resize: vertical;
