@@ -55,6 +55,7 @@ function setMenu() {
 
 								try {
 									core.sections = JSON.parse(data);
+									counter.num = core.sections.length;
 								} catch (err) {
 									if (err) throw err;
 								}
@@ -394,6 +395,7 @@ function yesNoButtonHandler() {
 	if(yesOrNo.toLowerCase() == "yes") { // The button pressed was a "Yes" button
 	if(!core.answers[questionID]) { // Continue only if "Yes" button wasn't already pressed
 	core.answers[questionID] = true; // Set the current question to true
+	$('#addQuestion').remove();
 	$('#submitButton').remove(); // Remove the submit button for now
 	
 	// For each question/input in this section that is not a yes/no question, create and append it
@@ -416,6 +418,7 @@ function yesNoButtonHandler() {
 	}
 	
 	// Re-add the submit button
+	addQuestionButton();
 	addSubmitButton();
 }
 
@@ -533,12 +536,16 @@ function loadSection(sectionIndex) {
 
 class Counter {
 	constructor() {
-		this.i = 0;
+		this.i = core.currentSectionIndex + 1;
 	}
 
 	get num() {
 		this.i++;
 		return this.i;
+	}
+
+	set num(n) {
+		this.i = n;
 	}
 }
 
@@ -562,20 +569,35 @@ function addSectionButton() {
 	loadSection(core.currentSectionIndex);
 }
 
+var questionTypes = ['Yes–No Question', 'Single Line', 'Text Box', 'Multiple Choice'];
 function addQuestionButton() {
 	var main = document.getElementById("questionAnswer");
 
-	var button = document.createElement("button");
+	var div = document.createElement("div");
+	div.id = "addQuestion";
+	
+	var select = document.createElement("select");
+	for (var i in questionTypes) {
+		var option = document.createElement("option");
+		option.text = questionTypes[i];
+		select.appendChild(option);
+	}
+
+	var button = document.createElement("button");	
 	button.innerHTML = "Add Question";
+	button.link = select;
 	button.onclick = function() {
 		var editor = document.getElementById("item-editor");
 		// while (editor.firstChild) {
 		// 	editor.removeChild(editor.firstChild);
 		// }
-		console.log('Click!');
+		console.log(this.link.value);
 	}
 
-	main.appendChild(button);
+	div.appendChild(select);
+	div.appendChild(button);
+
+	main.appendChild(div);
 }
 
 function loadSectionEditor(section) {
