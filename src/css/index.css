@@ -111,15 +111,12 @@ html, body {
     resize: vertical;
 }
 
-#navbar-wrapper {
-    grid-column: span 2;
-    padding-right: 2vh;
-}
-
 #navbar {
     height: 100%;
     box-shadow: 5px 0px 5px #f1f1f1, -5px 0px 5px #f1f1f1;
     grid-column: span 2;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #main {
