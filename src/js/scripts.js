@@ -385,54 +385,51 @@ function addSingleChoiceOption(questionID, questionLabel, options) {
 function yesNoButtonHandler() {
 	var yesOrNo = $(window.event.target)[0].outerText;
 	var questionID = $(window.event.target)[0].name;
-	
-	if( (yesOrNo.toLowerCase() === "yes" && !core.answers[questionID]) || (yesOrNo.toLowerCase() === "no" && core.answers[questionID]) ){
-		$(`#${questionID}_Group`).children('button').each(function() {$(this).toggleClass('active')});
-	}
-	
-	var sectionInputs = core.sections[core.currentSectionIndex].sectionInputs;
-	
-	if(yesOrNo.toLowerCase() == "yes") { // The button pressed was a "Yes" button
-	if(!core.answers[questionID]) { // Continue only if "Yes" button wasn't already pressed
-	core.answers[questionID] = true; // Set the current question to true
-	$('#addQuestion').remove();
-	$('#submitButton').remove(); // Remove the submit button for now
-	
-	// For each question/input in this section that is not a yes/no question, create and append it
-	var yesNoIndex = sectionInputs.findIndex(element => element.questionID == questionID);
-	
-	for(var n = yesNoIndex+1; n < sectionInputs.length; n++) {
-		var sectionInput = sectionInputs[n];
-		
-		if(sectionInput.questionID != questionID) {
-			if(sectionInput.inputType == "yesNoQuestion") {
-				addyesNoQuestion(sectionInput.questionID, sectionInput.inputLabel);
-			} else if(sectionInput.inputType == "singleLineText") {
-				addSingleLineInput(sectionInput.questionID, sectionInput.inputLabel);
-			} else if(sectionInput.inputType == "textBoxInput") {
-				addTextBoxInput(sectionInput.questionID, sectionInput.inputLabel, sectionInput.defaultText);
-			} else if(sectionInput.inputType == "singleChoiceOption") {
-				addSingleChoiceOption(sectionInput.questionID, sectionInput.inputLabel, sectionInput.radioOptions);
-			}
-		}
-	}
-	
-	// Re-add the submit button
-	addQuestionButton();
-	addSubmitButton();
-}
 
-} else {
-	core.answers[questionID] = false;
-	
-	for(i in sectionInputs) {
-		if(i > sectionInputs.findIndex(element => element.questionID == questionID)) {
-			var sectionInput = sectionInputs[i];
-			$('#' + sectionInput.questionID).parent().remove();
-			$(`#${sectionInput.questionID}_label`).parent().remove();
+	if( (yesOrNo.toLowerCase() === "yes" && !core.answers[questionID]) || (yesOrNo.toLowerCase() === "no" && core.answers[questionID]) ){
+		$(this).parent().children('button').each(function() {$(this).toggleClass('active')});
+	}
+
+	var sectionInputs = core.sections[core.currentSectionIndex].sectionInputs;
+
+	if(yesOrNo.toLowerCase() == "yes") { // The button pressed was a "Yes" button
+		if(!core.answers[questionID]) { // Continue only if "Yes" button wasn't already pressed
+			core.answers[questionID] = true; // Set the current question to true
+			$('#addQuestion').remove();
+			$('#submitButton').remove(); // Remove the submit button for now
+
+			// For each question/input in this section that is not a yes/no question, create and append it
+			var yesNoIndex = sectionInputs.findIndex(element => element.questionID == questionID);
+
+			for(var n = yesNoIndex+1; n < sectionInputs.length; n++) {
+				var sectionInput = sectionInputs[n];
+
+				if(sectionInput.questionID != questionID) {
+					if(sectionInput.inputType == "yesNoQuestion") {
+						addyesNoQuestion(sectionInput.questionID, sectionInput.inputLabel);
+					} else if(sectionInput.inputType == "singleLineText") {
+						addSingleLineInput(sectionInput.questionID, sectionInput.inputLabel);
+					} else if(sectionInput.inputType == "textBoxInput") {
+						addTextBoxInput(sectionInput.questionID, sectionInput.inputLabel, sectionInput.defaultText);
+					} else if(sectionInput.inputType == "singleChoiceOption") {
+						addSingleChoiceOption(sectionInput.questionID, sectionInput.inputLabel, sectionInput.radioOptions);
+					}
+				}
+			}
+
+			// Re-add the submit button
+			addQuestionButton();
+			addSubmitButton();
+		}
+
+	} else {
+		core.answers[questionID] = false;
+		var sectionInput = document.getElementById("questionAnswer");
+
+		for (var i = sectionInputs.length - 1; i > sectionInputs.findIndex(element => element.questionID == questionID); i--) {
+			sectionInput.removeChild(sectionInput.children[i]);
 		}
 	}
-}
 }
 
 function progressButtonHandler() {
@@ -536,7 +533,7 @@ function loadSection(sectionIndex) {
 
 class Counter {
 	constructor() {
-		this.i = core.currentSectionIndex + 1;
+		this.i = core.currentSectionIndex;
 	}
 
 	get num() {
@@ -572,12 +569,18 @@ function addSectionButton() {
 var questionTypes = ['Yes–No Question', 'Single Line', 'Text Box', 'Multiple Choice'];
 function addQuestionButton() {
 	var main = document.getElementById("questionAnswer");
+	var sectionInputs = core.sections[core.currentSectionIndex].sectionInputs;
 
 	var div = document.createElement("div");
 	div.id = "addQuestion";
 	
 	var select = document.createElement("select");
 	for (var i in questionTypes) {
+		if (questionTypes[i] == "Yes–No Question") {
+			if (core.sections[core.currentSectionIndex].sectionInputs.some((elem) => elem.inputType == "yesNoQuestion")) {
+				continue;
+			}
+		}
 		var option = document.createElement("option");
 		option.text = questionTypes[i];
 		select.appendChild(option);
@@ -588,10 +591,70 @@ function addQuestionButton() {
 	button.link = select;
 	button.onclick = function() {
 		var editor = document.getElementById("item-editor");
-		// while (editor.firstChild) {
-		// 	editor.removeChild(editor.firstChild);
-		// }
-		console.log(this.link.value);
+
+		if (this.link.value == "Yes–No Question") {
+			var question = {
+				inputType: "yesNoQuestion",
+				questionID: "",
+				inputLabel: ""
+			}
+
+			sectionInputs.push(question);
+			loadSection(core.currentSectionIndex);
+
+			for (var i in question) {
+				switch (i) {
+					case "questionID":
+						var div = document.createElement("div");
+						div.innerHTML = "Question ID: "
+
+						var input = document.createElement("input");
+						input.type = "text";
+						input.link = question;
+						input.label = i;
+
+						input.oninput = function() {
+							this.link[this.label] = this.value;
+						}
+
+						editor.appendChild(input);
+						break;
+					case "inputLabel":
+						var div = document.createElement("div");
+						div.innerHTML = "Input Text: "
+
+						var input = document.createElement("input");
+						input.type = "text";
+						input.link = question;
+						input.label = i;
+
+						input.oninput = function() {
+							this.link[this.label] = this.value;
+						}
+
+						editor.appendChild(input);
+						break;
+				}
+			}
+		} else if (this.link.value == "Single Line") {
+			var question = {
+				inputType: "singleLineText",
+				questionID: "",
+				inputLabel: ""
+			}
+
+			sectionInputs.push(question);
+			loadSection(core.currentSectionIndex);
+		} else if (this.link.value == "Text Box") {
+			var question = {
+				inputType: "textBoxInput",
+				questionID: "",
+				inputLabel: ""
+			}
+
+			sectionInputs.push(question);
+			loadSection(core.currentSectionIndex);
+		}
 	}
 
 	div.appendChild(select);
