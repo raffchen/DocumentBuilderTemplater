@@ -82,15 +82,19 @@ html, body {
     box-shadow: 0 3px 1px #7f7f7f;
 }
 
-#section-editor {
+#section-editor, #item-editor {
     text-align: center;
 }
 
-#section-editor div {
+#item-editor {
+    margin-top: 1rem;
+}
+
+#section-editor div, #item-editor div {
     font-size: 14px;
 }
 
-#section-editor input, #section-editor textarea {
+#section-editor input, #section-editor textarea, #item-editor input, #item-editor textarea {
     width: 75%;
     margin-bottom: 1rem;
 }
@@ -98,6 +102,12 @@ html, body {
 #section-editor textarea {
     height: 3rem;
     max-height: 6rem;
+    resize: vertical;
+}
+
+#item-editor textarea {
+    height: 5rem;
+    max-height: 8rem;
     resize: vertical;
 }
 
