@@ -14,15 +14,15 @@
 <body>
     <div class="container">
         <div id="REPL-wrapper">
-            <div id="REPL-navbar">
-                <button id="REPL-button"></button>
+            <button id="REPL-button"></button>
+            <div id="editor">
+                <div id="section-editor"></div>
+                <div id="separator" style="width: 95%;margin-left: 1rem;"></div>
+                <div id="item-editor"></div>
             </div>
-            <div id="REPL"><textarea id="REPL-textarea"></textarea></div>
         </div>
 
-        <div id="navbar-wrapper">
-            <div id="navbar"></div>
-        </div>
+        <div id="navbar"></div>
     
         <div id="main">
             <div id="questionText"></div>
@@ -40,14 +40,10 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous">
     </script>
-    <script type="text/javascript" src="./js/scripts.js"></script>
-    <script type="text/javascript" src="./lib/ace/src/ace.js"></script>
-
+    <script src="./js/scripts.js" type="text/javascript"></script>
+ 
     <script>if (window.module) module = window.module;</script>
     <script>startProgramHandler()</script>
-
-    <script src="./lib/ace/src/theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
-    <script src="./lib/ace/src/mode-json.js" type="text/javascript" charset="utf-8"></script>
 </body>
 
 </html>
