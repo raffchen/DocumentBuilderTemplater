@@ -10,6 +10,6 @@
   "author": "Rafferty Chen",
   "license": "ISC",
   "dependencies": {
-    "electron": "^6.0.5"
+    "electron": "^9.4.0"
   }
 }
